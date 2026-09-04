@@ -7,3 +7,5 @@ channels:
 dependencies:
   - llvm =23.1.0 =hd68d874_1
   - graphviz =15.*
+  - boost-cpp
+  - symengine
