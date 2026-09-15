@@ -20,8 +20,10 @@ compiler state, and generated files that feed later stages. Stateless binary
 inspection utilities instead receive copies of the current workspace files,
 write their output back to the terminal, and terminate with their Worker.
 
-The first browser experiment used the `llvm-driver` package from the
-`emscripten-forge-4x-experimental` channel. Its WebAssembly module is 6.7 MB.
+The utility Worker uses an isolated conda prefix containing the `llvm-driver`
+package from the `emscripten-forge-4x-experimental` channel. Keeping this
+prefix separate prevents experimental packages from changing the persistent
+compiler runtime's dependency solve. Its WebAssembly module is 6.7 MB.
 In a local clean Chrome profile the first Worker completed in about 48 ms;
 subsequent fresh Workers completed in about 22–35 ms. All four utilities were
 also exercised after WasmBolt compiled a C++ snippet into a real Wasm object.

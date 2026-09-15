@@ -9,6 +9,10 @@ if [[ -z "${LLVM_WASM_PREFIX:-}" ]]; then
   echo "Set LLVM_WASM_PREFIX to the emscripten-forge LLVM target prefix." >&2
   exit 2
 fi
+if [[ -z "${LLVM_DRIVER_WASM_PREFIX:-}" ]]; then
+  echo "Set LLVM_DRIVER_WASM_PREFIX to the llvm-driver target prefix." >&2
+  exit 2
+fi
 if [[ -z "${LLVM_SOURCE_TREE:-}" ]]; then
   echo "Set LLVM_SOURCE_TREE to an llvm-project checkout matching the packaged LLVM version." >&2
   exit 2
@@ -34,6 +38,6 @@ cp index.html app.js styles.css tutorials.md tutorial_mlir.md tutorial_wasm.md \
   tutorial_aarch64.md tutorial_x86.md site/
 cp build/Compiler.js build/Compiler.wasm build/Compiler.data \
   build/WasmBoltMlirOpt.so site/
-cp "${LLVM_WASM_PREFIX}/bin/llvm.js" \
-  "${LLVM_WASM_PREFIX}/bin/llvm.wasm" \
+cp "${LLVM_DRIVER_WASM_PREFIX}/bin/llvm.js" \
+  "${LLVM_DRIVER_WASM_PREFIX}/bin/llvm.wasm" \
   llvm-utility-worker.js site/
