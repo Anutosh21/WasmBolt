@@ -124,20 +124,11 @@ micromamba create \
   --platform=emscripten-wasm32
 ```
 
-Create the isolated multicall utility prefix:
-
-```bash
-micromamba create \
-  -n wasmbolt-llvm-driver \
-  -f environment-llvm-driver.yml \
-  --platform=emscripten-wasm32
-```
-
-Activate `wasmbolt-wasm-build`, then point the build script at both prefixes:
+Activate `wasmbolt-wasm-build`, then point the build script at the target
+prefix:
 
 ```bash
 export LLVM_WASM_PREFIX="$MAMBA_ROOT_PREFIX/envs/wasmbolt-wasm-host"
-export LLVM_DRIVER_WASM_PREFIX="$MAMBA_ROOT_PREFIX/envs/wasmbolt-llvm-driver"
 export EMSCRIPTEN_SYSROOT="$CONDA_PREFIX/opt/emsdk/upstream/emscripten/cache/sysroot"
 bash scripts/build.sh
 python -m http.server 8000 --directory site

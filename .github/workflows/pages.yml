@@ -46,20 +46,11 @@ jobs:
             -f environment-wasm-host.yml \
             --platform=emscripten-wasm32
 
-      - name: Install the LLVM utility driver
-        shell: bash -l {0}
-        run: |
-          micromamba create -y \
-            -n wasmbolt-llvm-driver \
-            -f environment-llvm-driver.yml \
-            --platform=emscripten-wasm32
-
       - name: Build WasmBolt
         shell: bash -l {0}
         run: |
           set -euo pipefail
           export LLVM_WASM_PREFIX="${MAMBA_ROOT_PREFIX}/envs/wasmbolt-wasm-host"
-          export LLVM_DRIVER_WASM_PREFIX="${MAMBA_ROOT_PREFIX}/envs/wasmbolt-llvm-driver"
           export EMSCRIPTEN_SYSROOT="${CONDA_PREFIX}/opt/emsdk/upstream/emscripten/cache/sysroot"
           export CLANG_RESOURCE_TREE="${LLVM_WASM_PREFIX}/lib/clang/23"
           export LLVM_SOURCE_TREE="${GITHUB_WORKSPACE}/llvm-project"
